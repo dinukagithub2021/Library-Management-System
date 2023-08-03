@@ -1,4 +1,5 @@
-import '../Styles/Navbarhome.css'
+import '../Styles/Navbarhome.css';
+import '../Styles/index.css';
 
 function NavBarHome() {
     return (
@@ -8,7 +9,7 @@ function NavBarHome() {
                 <li><a href="/home">Home</a></li>
                 <li><a href="/news">About</a></li>
                 <li><a href="/contact">Contact</a></li>
-                <li><a href="/about">Sign In</a></li>
+                <li><a href='/login'>Sign In</a></li>
             </ul>
             <button><a href="/register" className='register'>Register</a></button>
         </div>
