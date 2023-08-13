@@ -1,0 +1,39 @@
+.preordered .title{
+    font-size: 50px;
+    color: #002C61;
+    margin-bottom: 20px;
+}
+
+.preordered .book-list{
+    display: flex;
+    flex-direction: column;
+}
+
+.preordered .book{
+    display: flex;
+    flex-direction: row;
+}
+
+.preordered .book-pic{
+    padding-right: 10%;
+}
+
+.preordered .book-details{
+    padding: 10px 20px;
+}
+
+.preordered .book-details > div{
+    padding: 10px 0;
+}
+
+.preordered .book-name{
+    font-size: 30px;
+}
+
+.preordered .book-author{
+    font-size: 15px;
+}
+
+.preordered .book-explore{
+    margin-left: 0 !important;
+}

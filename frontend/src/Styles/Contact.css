@@ -1,0 +1,28 @@
+.contact{
+    height: 400px;
+    padding: 40px;
+    background-image: linear-gradient(rgb(0,0,0,0.5),rgb(0,0,0,0.5)),url(../img/Contact.jpg);
+    background-size: 100%;
+    background-repeat: no-repeat;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    color: white;
+}
+
+
+
+.contact-title{
+    font-size: 40px;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+}
+
+.contact-details{
+
+}
+
+.contact-details > div{
+    margin: 20px;
+}
