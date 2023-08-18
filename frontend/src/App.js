@@ -4,6 +4,8 @@ import Register from './Pages/Register';
 import Login from './Pages/Login';
 import User from './Pages/User';
 import { Routes,Route} from 'react-router-dom';
+import Librarian from './Pages/Librarian';
+import Books from './Pages/Books';
 function App() {
   return (
         <div className="App">
@@ -13,6 +15,8 @@ function App() {
             <Route path='/register' element={<Register/>}></Route>
             <Route path='/contact' element={<Home/>}></Route>
             <Route path='/home' element={<User/>}></Route>
+            <Route path='/librarian' element={<Librarian/>}></Route>
+            <Route path='/books' element={<Books/>}></Route>
           </Routes>
       </div> 
       /*

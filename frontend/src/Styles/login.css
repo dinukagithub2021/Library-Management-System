@@ -26,7 +26,7 @@
     height: 70vh;
 }
 
-form{
+.login form{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -34,11 +34,11 @@ form{
     padding: 20px;
 }
 
-form  > div{
+.login form  > div{
     align-self: flex-start;
 }
 
-input{
+.login input{
     width: 30vw;
     height: 5vh;
     border: 0.5px solid black;

@@ -1,0 +1,29 @@
+
+.BooksCollection .books{
+    display: flex;
+    flex-direction: row;
+}
+
+.BooksCollection .book .book-pic{
+    padding-right: 10%;
+}
+
+.BooksCollection .book .book-details{
+    padding: 10px 20px;
+}
+
+.BooksCollection .book .book-details > div{
+    padding: 10px 0;
+}
+
+.BooksCollection .book .book-name{
+    font-size: 30px;
+}
+
+.BooksCollection .book .book-author{
+    font-size: 15px;
+}
+
+.BooksCollection .book .book-explore{
+    margin-left: 0 !important;
+}

@@ -1,33 +1,24 @@
+const {
+    createABook,
+    getABook,
+    getAllBooks,
+    deleteABook,
+    updateABook
+} = require("../controllers/bookController.js")
+
 const express = require("express");
-const Book = require("../models/book.js")
+const Book = require("../models/bookModel.js")
 
 const router = express.Router();
 
-router.get('/' , (req,res) => {
-    //GET Books
-})
+router.get('/' , getAllBooks)
 
-router.get('/:id' , (req,res) => {
-    //GET one book
-})
+router.get('/:id' , getABook)
 
-router.post('/' ,async  (req,res) => {
-    //Add Books
-    const {name,author,copies,description} = req.body;
-    try{
-        const book = await Book.create({name,author,copies,description});
-        res.status(200).json(book);
-    }catch(error){
-        res.status(400).json("Error!");
-    }
-})
+router.post('/' , createABook)
 
-router.delete('/' , (req,res) => {
-    //Delete Books
-})
+router.delete('/:id' , deleteABook)
 
-router.patch('/' , (req,res) => {
-    //Update Books
-})
+router.patch('/:id' , updateABook)
 
 module.exports = router;
