@@ -18,6 +18,10 @@ const bookSchema = new Schema({
     description:{
         type: String,
         required: true,
+    },
+    image:{
+        data: Buffer,
+        contentType: String,
     }
 }, {timestamps: true})
 

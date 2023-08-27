@@ -5,8 +5,6 @@ import '../img/Home-BG.avif';
 import About from "../Components/About";
 
 function Home() {
-   
-    
     return (
         <div className="home">
             <NavBarHome/>

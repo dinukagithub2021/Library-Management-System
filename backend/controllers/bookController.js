@@ -22,9 +22,9 @@ const getABook = async(req,res) =>{
 
 const createABook = async(req,res) => {
     //Add Books
-    const {title,author,copies,description} = req.body;
+    const {title,author,copies,description,image} = req.body;
     try{
-        const book = await Book.create({title,author,copies,description});
+        const book = await Book.create({title,author,copies,description,image});
         res.status(200).json(book);
     }catch(error){
         res.status(400).json("Error!");
