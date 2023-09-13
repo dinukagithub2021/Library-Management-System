@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import {useNavigate} from 'react-router-dom'
 import NavBarHome from '../Components/NavBarHome';
 import '../Styles/register.css'
 import { useRegister } from '../hooks/useRegister';
@@ -12,11 +13,16 @@ function Register() {
     const [address, setAddress] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
     const {signUp, error, isLoading} = useRegister()
+    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const navigate = useNavigate()
 
     const handleSubmit = async(e) => {
         e.preventDefault()
         await signUp(name,age,telephone,birthday,admissionNo,address,email,password)
+        setIsLoggedIn(true)
+        navigate("/books")
     }
 
     return (
@@ -34,10 +40,10 @@ function Register() {
                         <div className='address'><br/>Address<input type='text' onChange={(e) => setAddress(e.target.value)}></input></div>
                         <div className='email'>Email:<br/><input type='email' onChange={(e) => setEmail(e.target.value)}></input></div>
                         <div className='password'>Password:<br/><input type="password" onChange={(e) => setPassword(e.target.value)}></input></div>
-                        {/* <div className='confirm-password'>Confirm Password:<br/><input type="password" value={password}></input></div> */}
-                        <div>{password}</div>
-                        <button className='register-button button-primary' disabled={isLoading}>Register</button>
+                        {/* <div className='confirm-password'>Confirm Password:<br/><input type="password" onChange={(e) => setConfirmPassword(e.target.value)}></input></div> */}
                         {error && <div className='error'>{error}</div>}
+                        <button className='register-button button-primary' disabled={isLoading}>Register</button>
+        
                     </form>
                 </div>
             </div>

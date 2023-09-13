@@ -1,39 +1,44 @@
-.preordered .title{
+.All-Books .title, .order-title{
     font-size: 50px;
     color: #002C61;
     margin-bottom: 20px;
 }
 
-.preordered .book-list{
+.All-Books .book-list{
     display: flex;
     flex-direction: column;
 }
 
-.preordered .book{
+.All-Books .book, .order{
     display: flex;
     flex-direction: row;
 }
 
-.preordered .book-pic{
-    padding-right: 10%;
+.All-Books .book-pic, .order-pic{
+    flex-basis: 5%;
 }
 
-.preordered .book-details{
+.All-Books .book-details, .order-details{
     padding: 10px 20px;
 }
 
-.preordered .book-details > div{
+.All-Books .book-pic > img, .order-pic > img{
+    width: 100px;
+}
+
+.All-Books .book-details > div, .order-details > div{
     padding: 10px 0;
 }
 
-.preordered .book-name{
-    font-size: 30px;
+.All-Books .book-name, .order-name{
+    font-size: 20px;
+    color: #002C61;
 }
 
-.preordered .book-author{
+.All-Books .book-author, .order-author{
     font-size: 15px;
 }
 
-.preordered .book-explore{
+.All-Books .book-explore{
     margin-left: 0 !important;
 }

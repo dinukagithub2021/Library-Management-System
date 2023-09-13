@@ -20,7 +20,7 @@ body{
 }
 
 
-form{
+.register-form form{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -29,7 +29,7 @@ form{
     color: #002C61;
 }
 
-form  > div{
+.register-form form  > div{
     width: 100%;
     margin: 20px;
     align-self: flex-start;
@@ -56,7 +56,7 @@ form  > div{
     font-size: 15px;
 }
 
-.register-form{
+.register-.register-form form{
     display: flex;
     justify-content: center;
 }

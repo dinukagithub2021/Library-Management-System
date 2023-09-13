@@ -19,9 +19,8 @@ const bookSchema = new Schema({
         type: String,
         required: true,
     },
-    image:{
-        data: Buffer,
-        contentType: String,
+    coverImage:{
+        type:String,
     }
 }, {timestamps: true})
 

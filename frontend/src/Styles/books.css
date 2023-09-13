@@ -1,29 +1,219 @@
 
-.BooksCollection .books{
+
+.AllBooks .Navbar{
+    margin-bottom: 20px !important;
+}
+
+.BooksCollection{
+    overflow-y:scroll;
+    padding-left: 5px;
+    position: relative;
+    z-index: 1;
+}
+
+
+
+.books-title{
+    font-size: 40px;
+    font-weight: 500;
+    margin-bottom: 30px;
+}
+
+.book{
     display: flex;
-    flex-direction: row;
+    align-items: center;
+    border-bottom: 0.3px solid #002C61;
+    position: relative;
 }
 
-.BooksCollection .book .book-pic{
-    padding-right: 10%;
+.book-image{
+    flex-basis: 5%;
 }
 
-.BooksCollection .book .book-details{
-    padding: 10px 20px;
+.book-image  > img{
+    width: 100px;
 }
 
-.BooksCollection .book .book-details > div{
-    padding: 10px 0;
+.book .book-details{
+    padding-left: 5%;
 }
 
-.BooksCollection .book .book-name{
+.book-details > *:not(button){
+    padding: 3px 0 ;
+}
+
+.book-details .book-name{
+    font-size: 20px;
+    color: #002C61;
+}
+
+.delete{
     font-size: 30px;
+    position: absolute;
+    top: 0;
+    right: 5px;
+    cursor: pointer;
 }
 
-.BooksCollection .book .book-author{
-    font-size: 15px;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.modal{
+    width: calc(100% - 20vh);
+    height: calc(100% - 10vh);
+    display: none;
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    margin: auto;
+    background-color: white;
+    z-index: 1000;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+    animation-name: animatetop;
+    animation-duration: 0.4s
 }
 
-.BooksCollection .book .book-explore{
-    margin-left: 0 !important;
+@keyframes animatetop {
+    from {top: -300px; opacity: 0}
+    to {top: 50%; opacity: 1}
+  }
+
+.modal.modal-open{
+    display: block;
+}
+
+.overlay{
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    z-index: 999; /* Higher z-index than the modal */
+    display: none; /* Initially hidden */
+}
+
+.overlay.modal-open{
+    display: block;
+}
+
+.AddBook{
+    padding: 10px;
+    color: #002C61;
+    position: relative;
+}
+
+
+.AddBook h1{
+    margin-bottom: 5px;
+}
+
+.AddBookDiv{
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: 75px 75px 125px 75px 100px;
+}
+
+.Book-Title{
+    grid-column: 1 / span 2;
+}
+
+.Book-description{
+    grid-column: 1 / span 2;
+    max-width: fit-content;
+}
+
+.Book-description textarea{
+    padding: 5px 10px 0 5px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.filepond--wrapper{
+    grid-column: 1/ span 2;
+}
+
+.filepond--root,
+.filepond--root .filepond--drop-label{
+    grid-column: inherit;
+    height: 76px;
+}
+
+.AddBook input{
+    width: fit-content;
+    height: 50px;
+    padding-left: 10px;
+}
+
+.AddBook .Book-Author input{
+    width: 200px;
+}
+
+.AddBook .Book-Title input{
+    width: 500px;
+}
+
+.Book-copies input{
+    height: 25px;
+}
+
+.AddBook button{
+    width: 120px;
+    height: 40px;
+    line-height: 50%;
+    margin-left: 5px;
+}
+
+.close-button{
+    font-size: 20px;
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    cursor: pointer;
+}
+
+.error-msg{
+    display: none;
+}
+
+.error-msg.open{
+    display: block;
 }

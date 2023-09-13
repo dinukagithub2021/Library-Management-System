@@ -2,7 +2,7 @@ const User = require("../models/userModel")
 const token= require("jsonwebtoken")
 
 const createAToken = (_id) => {
-    return token.sign({_id}, process.env.SECRET, {expiresIn: '1d'})
+    return token.sign({_id}, process.env.SECRET)
 }
 
 

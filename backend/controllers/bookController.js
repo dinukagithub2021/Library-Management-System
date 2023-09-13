@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const Book = require("../models/bookModel.js")
+const multer  = require("multer")
 
 const getAllBooks = async(req,res) => {
     const books = await Book.find({}).sort({createdAt : -1})
@@ -22,12 +23,16 @@ const getABook = async(req,res) =>{
 
 const createABook = async(req,res) => {
     //Add Books
-    const {title,author,copies,description,image} = req.body;
+    const {title,author,copies,description} = req.body;
+    if (!req.file) {
+        return res.status(400).json({ message: 'Please upload a cover image' });
+    }
+    const coverImage = req.file.path
     try{
-        const book = await Book.create({title,author,copies,description,image});
+        const book = await Book.create({title,author,copies,description,coverImage});
         res.status(200).json(book);
     }catch(error){
-        res.status(400).json("Error!");
+        res.status(400).json("Fill all the information");
     }
 }
 

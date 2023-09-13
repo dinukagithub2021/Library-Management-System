@@ -6,40 +6,39 @@ const validator = require("validator");
 const userSchema = new Schema({
     name:{
         type: String,
-        required: true,
+        
     },
     age:{
         type: Number,
-        required: true,
+        
     },
     telephone:{
         type: String,
-        required: true,
+        
     },
     birthday:{
         type: String,
-        required: true,
+        
     },
     admissionNo:{
         type: String,
-        required: true,
+        
     },
     address:{
         type: String,
-        required: true,
+        
     },
     email:{
         type: String,
-        required: true,
         unique: true,
     },
     password:{
         type: String,
-        required: true,
+        
     },
 })
 
-userSchema.statics.signup = async function(name,age,telephone,birthday,admissionNo,address,email, password){
+userSchema.statics.signup = async function(name,age,telephone,birthday,admissionNo,address,email, password, isLibrarian){
     if(!name){
         throw Error("Name must be filled")
     }
@@ -62,7 +61,7 @@ userSchema.statics.signup = async function(name,age,telephone,birthday,admission
     }
     const salt = await bcrypt.genSalt(10);
     const hash = await bcrypt.hash(password, salt);
-    const user = await this.create({name,age,telephone,birthday,admissionNo,address,email, password:hash})
+    const user = await this.create({name,age,telephone,birthday,admissionNo,address,email, password:hash, isLibrarian})
     return user
 }
 

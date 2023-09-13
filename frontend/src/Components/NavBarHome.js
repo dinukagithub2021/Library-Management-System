@@ -2,12 +2,18 @@ import '../Styles/Navbarhome.css';
 import '../Styles/index.css';
 import { Link } from 'react-router-dom';
 import { useLogout } from '../hooks/useLogout';
+import { useAuthContext } from '../hooks/useAuthContext';
+import { useNavigate } from 'react-router-dom';
+import { useState } from 'react';
 
 function NavBarHome() {
     const {logOut} = useLogout()
+    const {user} = useAuthContext()
+    const [selectedPage, setSelectedPage] = useState('');
 
-    const handleClick = () => {
+    const handleLogOutClick = () => {
         logOut()
+        navigate("/login")
     }
 
     const navChange = () => {
@@ -15,25 +21,57 @@ function NavBarHome() {
         Nav.classList.toggle("change")
     }
 
+    const pages = [
+        { name: 'Student', path: '/login' },
+        { name: 'Librarian', path: '/librarian/login' },
+      ];
+    const navigate = useNavigate();
+    
+      const handleSelectChange = (event) => {
+        const selectedValue = event.target.value;
+        setSelectedPage(selectedValue);
+
+        if (selectedValue) {
+          const selectedPage = pages.find((page) => page.name === selectedValue);
+          if (selectedPage) {
+            navigate(selectedPage.path);
+          }
+        }
+      };
+
+
     return (
-        <div className="Navbar" onClick={navChange}>
-            <div className='Menu'>
+        <div className="Navbar">
+            <div className='Menu' onClick={navChange}>
                 <div className='bar1'> </div>
                 <div className='bar2'> </div>
                 <div className='bar3'> </div>
             </div>
             <ul>
-                <li><div className='Logo'></div></li>
+                <li className='logo-li'><div className='Logo'></div></li>
                 <Link to='/'><li>Home</li></Link>
                 <Link to ="/#about" onClick={() =>navChange}><li>About</li></Link>
                 <Link to ="/#contact" onClick={() =>navChange}><li>Contact</li></Link>
-                <Link to='/signin'><li>Sign In</li></Link>
+                {user ? (
+                    <li><div>{user.username}</div></li>
+                    ) : (
+                    <li className='select'>
+                        <select value={selectedPage} onChange={handleSelectChange}>
+                            <option>Sign In</option>
+                            {pages.map((page) => (
+                                <option key={page.path}>
+                                    <Link to={page.path}>{page.name}</Link>
+                                </option>
+                            ))}
+                        </select>
+                    </li>
+                )}
             </ul>
-                {(localStorage.getItem("user")) == null && 
+                {!user && 
                     <button className='button-primary navbar-button'><a href="/register" className='register'><Link to='/register'>Register</Link></a></button>
                 }
-                {(localStorage.getItem("user")) != null && 
-                <button className='button-primary navbar-button' onClick={handleClick}>Log Out</button>
+                {user && 
+                <button className='button-primary navbar-button' onClick={handleLogOutClick}>Log Out</button>
                 }
         </div>
     );
