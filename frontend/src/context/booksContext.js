@@ -10,6 +10,8 @@ export const BookReducer = (state,action)=> {
             return {books: [action.payload, ...state.books]}
         case 'DELETE_BOOK':
             return {books: state.books.filter((b) => b._id !== action.payload._id)}
+        case 'UPDATE_BOOK':
+            return {books: state.books.filter((b) => b._id !== action.payload._id)}
         default:
             return state
     }

@@ -15,14 +15,14 @@ function Register() {
     const [password, setPassword] = useState("")
     const [confirmPassword, setConfirmPassword] = useState("")
     const {signUp, error, isLoading} = useRegister()
-    const [isLoggedIn, setIsLoggedIn] = useState(false)
+    const [isLogging, setIsLogging] = useState(false)
     const navigate = useNavigate()
 
     const handleSubmit = async(e) => {
         e.preventDefault()
+        setIsLogging(true)
         await signUp(name,age,telephone,birthday,admissionNo,address,email,password)
-        setIsLoggedIn(true)
-        navigate("/books")
+        setIsLogging(false)
     }
 
     return (
@@ -41,7 +41,8 @@ function Register() {
                         <div className='email'>Email:<br/><input type='email' onChange={(e) => setEmail(e.target.value)}></input></div>
                         <div className='password'>Password:<br/><input type="password" onChange={(e) => setPassword(e.target.value)}></input></div>
                         {/* <div className='confirm-password'>Confirm Password:<br/><input type="password" onChange={(e) => setConfirmPassword(e.target.value)}></input></div> */}
-                        {error && <div className='error'>{error}</div>}
+                        {error && <div className='error-msg'>{error}</div>}
+                        {isLogging && <div className='warning-msg'>Registering....</div>}
                         <button className='register-button button-primary' disabled={isLoading}>Register</button>
         
                     </form>

@@ -5,10 +5,10 @@
 }
 
 .BooksCollection{
-    overflow-y:scroll;
     padding-left: 5px;
     position: relative;
     z-index: 1;
+    padding-bottom: 20px;
 }
 
 
@@ -17,12 +17,14 @@
     font-size: 40px;
     font-weight: 500;
     margin-bottom: 30px;
+    font-family: cursive;
 }
 
 .book{
     display: flex;
     align-items: center;
-    border-bottom: 0.3px solid #002C61;
+    padding: 10px 0;
+    border-bottom: 5px solid #002C61;
     position: relative;
 }
 
@@ -45,6 +47,23 @@
 .book-details .book-name{
     font-size: 20px;
     color: #002C61;
+    font-weight: 600;
+}
+
+.book-details .copies{
+    color: green
+}
+
+.book-details > .description{
+    font-size: 16px;
+    line-height: 1.5;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.book-details  > .created-at, .book-details > .updated-at{
+    padding: 5px 0;
+    font-family: Georgia, 'Times New Roman', Times, serif
 }
 
 .delete{
@@ -55,8 +74,30 @@
     cursor: pointer;
 }
 
+.edit-symbol{
+    font-size: 30px;
+    position: absolute;
+    top: 0;
+    right: 30px;
+    cursor: pointer;
+}
 
 
+form.edit{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: 20px 0;
+    border: none;
+}
+
+.book.border-none{
+    border: none
+}
+
+.book .created-at, .book .updated-at{
+    text-transform: capitalize;
+}
 
 
 
@@ -135,7 +176,7 @@
     display: block;
 }
 
-.AddBook{
+.AddBook, form.edit{
     padding: 10px;
     color: #002C61;
     position: relative;
@@ -177,7 +218,7 @@
     height: 76px;
 }
 
-.AddBook input{
+.AddBook input, form.edit input{
     width: fit-content;
     height: 50px;
     padding-left: 10px;
@@ -195,7 +236,7 @@
     height: 25px;
 }
 
-.AddBook button{
+.AddBook button, form.edit button{
     width: 120px;
     height: 40px;
     line-height: 50%;
@@ -210,10 +251,10 @@
     cursor: pointer;
 }
 
-.error-msg{
+.error-books{
     display: none;
 }
 
-.error-msg.open{
+.error-msg.books{
     display: block;
 }

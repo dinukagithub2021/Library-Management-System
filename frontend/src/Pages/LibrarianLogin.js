@@ -1,19 +1,26 @@
 import { useState } from 'react';
+import "../index.css"
+import { useNavigate } from 'react-router-dom';
 import {useLibrarianLogin} from '../hooks/useLibrarianLogin'
+import NavBarHome from '../Components/NavBarHome';
+import "../Styles/login.css"
 
 function LibrarianLogin() {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
     const {librarianLogIn, error, isLoading} = useLibrarianLogin()
+    const navigate = useNavigate()
 
     const handleSubmit = async(e) => {
         e.preventDefault();
         await librarianLogIn(username,password)
-        
+        navigate("/librarian/preorders")
     }
 
     return (
-        <div className="lib-login">
+        <div className="login">
+            <NavBarHome/>
+             <div className='login-form'>
              <div className='login-page'>
                     <form onSubmit={handleSubmit}>
                         <h2 className='title'>Login</h2>
@@ -23,6 +30,7 @@ function LibrarianLogin() {
                         {error && <div className='error'>{error}</div>}
                     </form>
                 </div>
+             </div>
         </div>
     );
 }

@@ -5,12 +5,16 @@ export const PreOrdersContext = createContext()
 export const PreOrderReducer = (state,action)=> {
     switch (action.type){
         case 'SET_ORDERS':
-            return {preOrders: action.payload}
+            console.log([...action.payload])
+            return {preOrders: [...action.payload]}
         case 'CREATE_ORDER':
-            return {preOrders: [action.payload, ...state.preOrders]}
+            console.log('Creating order', action.payload);
+            console.log('state.preOrdres', state.preOrders)
+            const updatedPreOrders = [{...action.payload}, ...state.preOrders];
+           
+            console.log('Updated preOrders', updatedPreOrders);
+            return { preOrders: updatedPreOrders };
         case 'DELETE_ORDER':
-            return {preOrders: state.preOrders.filter((b) => b._id !== action.payload._id)}
-        case 'GET_ORDER':
             return {preOrders: state.preOrders.filter((b) => b._id !== action.payload._id)}
         default:
             return state

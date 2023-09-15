@@ -11,6 +11,7 @@ import BookDetails from '../Components/BookDetails'
 registerPlugin()
 
 function Books() {
+
     const {books, dispatch} = useBooksContext()
     const [title, setTitle] = useState('');
     const [author, setAuthor] = useState('');
@@ -24,6 +25,7 @@ function Books() {
     const [errorFetch, setErrorFetch] = useState('')
     const [success, SetSuccess] = useState('')
     const [isAdding, SetIsAdding] = useState(false)
+    const [isLoading, setIsLoading] = useState(false)
 
     const handleFileChange = (fileItems) => {
         console.log(fileItems[0])
@@ -34,6 +36,7 @@ function Books() {
 
     useEffect(() => {
         const fetchAllBooks = async() => {
+            setIsLoading(true)
             const response = await fetch('/api/books')
             const json = await response.json()
 
@@ -43,8 +46,8 @@ function Books() {
             if(!response.ok){
                 setErrorFetch(response.statusText)
             }
-            
 
+            setIsLoading(false)
         }
 
         fetchAllBooks()
@@ -74,6 +77,7 @@ function Books() {
             }
         })
         const json = await response.json()
+        console.log(json)
         if(!response.ok){
             if(response.statusText == 'Bad Request'){
                 setError("Fill out all the information!")
@@ -92,7 +96,9 @@ function Books() {
             setDescription('')
             setCoverImage('')
             setError('')
+            console.log("ff" + books)
             dispatch({type: 'CREATE_BOOK', payload: json})
+            console.log("later" + books) 
             closeModal();
             closeError();
             SetSuccess("Uploaded the document")
@@ -135,8 +141,11 @@ function Books() {
         <div className="AllBooks">
             <NavBarHome/>
             <div className="books-section">
+            <   div className="books-title">Book Collection</div>
                 <div className={`BooksCollection`}>
-                    <div className="books-title">Book Collection</div>
+                    {isLoading && 
+                        <div className="loading-msg">Fetching all the books....</div>
+                    }
                     {errorFetch && 
                         <div className="error-fetch error-msg">{errorFetch}</div>
                     }
@@ -152,7 +161,7 @@ function Books() {
                     <form className="AddBook" onSubmit={handleSubmit}>
                         <h1>Add a Book</h1>
                         {error && 
-                            <div className={`error-msg ${isErrorOpen ? 'open' : ''}`}>{error} <span onClick={closeError}>x</span></div>
+                            <div className={`error-msg ${isErrorOpen ? 'open' : ''} error-books`}>{error} <span onClick={closeError}>x</span></div>
                         }
                         <div className="AddBookDiv">
                             <div className='Book-Title'>Book Title:<br/><input type='text' onChange={(e) => setTitle(e.target.value)} value={title}></input></div>
@@ -168,9 +177,6 @@ function Books() {
                                 className='file-upload'
                             />
                             <button className="button-primary">Add the Book</button>
-                            {isAdding && 
-                                <div className="loading-msg">Loading........</div>
-                            }
                         </div>
                         <span className="close-button" onClick={closeModal}>
                             X

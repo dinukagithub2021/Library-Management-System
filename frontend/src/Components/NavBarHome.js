@@ -5,6 +5,7 @@ import { useLogout } from '../hooks/useLogout';
 import { useAuthContext } from '../hooks/useAuthContext';
 import { useNavigate } from 'react-router-dom';
 import { useState } from 'react';
+import logo from "../img/logo.jpg"
 
 function NavBarHome() {
     const {logOut} = useLogout()
@@ -48,12 +49,17 @@ function NavBarHome() {
                 <div className='bar3'> </div>
             </div>
             <ul>
-                <li className='logo-li'><div className='Logo'></div></li>
-                <Link to='/'><li>Home</li></Link>
-                <Link to ="/#about" onClick={() =>navChange}><li>About</li></Link>
-                <Link to ="/#contact" onClick={() =>navChange}><li>Contact</li></Link>
+                <li className='logo-li'><img src={logo}></img></li>
+                {/* <Link to='/'><li><img src={logo}></img></li></Link> */}
+
+                {!user && (
+                    <Link to ="/#about" onClick={() =>navChange}><li>About</li></Link>
+                )}
+                {!user && (
+                    <Link to ="/#contact" onClick={() =>navChange}><li>Contact</li></Link>
+                )}
                 {user ? (
-                    <li><div>{user.username}</div></li>
+                    <li><div>{user.username || user.email}</div></li>
                     ) : (
                     <li className='select'>
                         <select value={selectedPage} onChange={handleSelectChange}>

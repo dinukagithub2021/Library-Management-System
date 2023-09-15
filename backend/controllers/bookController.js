@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 const Book = require("../models/bookModel.js")
-const multer  = require("multer")
+const preOrder = require("../models/preOrdersModel.js")
 
 const getAllBooks = async(req,res) => {
     const books = await Book.find({}).sort({createdAt : -1})
@@ -11,7 +11,7 @@ const getAllBooks = async(req,res) => {
 const getABook = async(req,res) =>{
     const {id} = req.params;
 
-    if(!mongoose.Types.ObjectID.isValid(id)){
+    if(!mongoose.Types.ObjectId.isValid(id)){
         return res.status(404).json({error: 'No Such Book!'})
     }
     const currentBook = await Book.findById(id);
@@ -29,7 +29,7 @@ const createABook = async(req,res) => {
     }
     const coverImage = req.file.path
     try{
-        const book = await Book.create({title,author,copies,description,coverImage});
+        const book = await Book.create({title,author,copies,description,coverImage,remainingCopies: copies});
         res.status(200).json(book);
     }catch(error){
         res.status(400).json("Fill all the information");
@@ -45,21 +45,50 @@ const deleteABook = async(req,res) => {
     if(!currentBook){
         return res.status(404).json({error: 'No Such Book!'})
     }
+    const deletePreorders = await preOrder.findById(id)
+    if(deletePreorders){
+        deletePreorders.map((deleteorder) => {
+            const deletedOrder = preOrder.findByIdAndDelete(deleteorder._id);
+            if(!deletedOrder){
+                return res.status(404).json("Error in deleting!")
+            }
+        })
+    }
     res.status(200).json(currentBook);
 }
 
 const updateABook = async(req,res) => {
     const {id} = req.params;
+    const {title, author, copies, description, remainingCopies} = req.body;
     if(!mongoose.Types.ObjectId.isValid(id)){
+        console.log("hi!!!!!!!!")
         return res.status(404).json({error: 'No Such Book!'})
     }
-    const currentBook = await Book.findByIdAndUpdate({_id : id} , {
-        ...req.body
-    })
-    if(!currentBook){
-        return res.status(404).json({error: 'No Such Book!'})
+    const preOrderCount = await preOrder.find({currentBook: id})
+    const numberOfPreOrder = preOrderCount.length
+    if(title || author || copies || description){
+        const updatedBook = await Book.findByIdAndUpdate(id, {
+            title,author,copies,description, remainingCopies: copies - numberOfPreOrder
+        }, {new: true})
+        if(!updatedBook){
+            console.log("bye!!!!!!!!!!")
+            return res.status(404).json({error: 'No Such Book!'})
+        }
+
+        res.status(200).json(updatedBook);
+
+    }else if(remainingCopies){
+        const updatedBook = await Book.findByIdAndUpdate(id, {
+            remainingCopies
+        }, {new: true})
+
+        if(!updatedBook){
+            return res.status(404).json({error: 'No Such Book!'})
+        }
+
+        res.status(200).json(updatedBook);
     }
-    res.status(200).json(currentBook);
+    
 }
 
 module.exports = {

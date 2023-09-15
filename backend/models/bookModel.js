@@ -21,6 +21,10 @@ const bookSchema = new Schema({
     },
     coverImage:{
         type:String,
+    },
+    remainingCopies:{
+        type: Number,
+        required: true
     }
 }, {timestamps: true})
 

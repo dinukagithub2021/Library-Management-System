@@ -26,12 +26,12 @@ function App() {
   return (
         <div className="App">
           <Routes>
-            <Route path='/' element={<Home/>}></Route>
+            <Route path='/' element={user ? (hasEmail ? <User/> : <Books/>) : <Home/>}></Route>
             <Route path='/register' element={user ? <Navigate to = '/user'></Navigate>:<Register/>}></Route>
             <Route path='/contact' element={<Home/>}></Route>
             <Route path='/login' element={<Login/>}></Route>
-            <Route path='/user' element={<User/>}></Route>
-            <Route path='/books' element={<Books/>}></Route>
+            <Route path='/user' element={hasEmail ? <User/> : <Books/>}></Route>
+            <Route path='/books' element={hasEmail ? <User/> : <Books/>}></Route>
             <Route path='/librarian/login' element={<LibrarianLogin/>}></Route>
             <Route path="/librarian/preorders" element={<PreOrders/>}></Route>
           </Routes>
